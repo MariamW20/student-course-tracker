@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login | Student Course Tracker</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body class="login-body">
+    <main class="container py-5">
+      <section class="login-shell mx-auto">
+        <div class="login-brand">
+          <div class="login-brand-copy">
+            <p class="eyebrow mb-2">Student Records Portal</p>
+            <h1 class="display-5 mb-3">Welcome back</h1>
+            <p class="login-intro mb-4">
+              Sign in to access the academic records dashboard for students, courses, and enrollment activity.
+            </p>
+          </div>
+          <div class="feature-list">
+            <article class="feature-card">
+              <h2>Trusted record keeping</h2>
+              <p>Maintain consistent student and course information with a layout designed for everyday academic administration.</p>
+            </article>
+            <article class="feature-card">
+              <h2>Focused dashboard access</h2>
+              <p>Recorded details now live on their own page, so the working area stays separate from the public welcome screen.</p>
+            </article>
+            <article class="feature-card">
+              <h2>Green-led presentation</h2>
+              <p>A calmer green, slate, and soft-neutral palette gives the system a cleaner institutional feel.</p>
+            </article>
+          </div>
+        </div>
+        <div class="login-panel">
+          <p class="panel-kicker mb-2">Secure Access</p>
+          <h2 class="h4 mb-3">Sign in to continue</h2>
+          <p class="login-panel-copy mb-4">
+            Enter your administrator account details to open the dashboard.
+          </p>
+          {% if error %}
+          <div class="alert alert-danger" role="alert">{{ error }}</div>
+          {% endif %}
+          <form id="loginForm" method="post" class="row g-3">
+            <div class="col-12">
+              <label class="form-label" for="username">Username</label>
+              <input class="form-control" id="username" name="username" required>
+            </div>
+            <div class="col-12">
+              <label class="form-label" for="password">Password</label>
+              <input class="form-control" id="password" name="password" type="password" required>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-dark w-100" type="submit">Sign in</button>
+            </div>
+          </form>
+          <a class="back-link mt-4 d-inline-flex align-items-center" href="{{ url_for('main.landing') }}">Back to landing page</a>
+        </div>
+      </section>
+    </main>
+  </body>
+  </html>

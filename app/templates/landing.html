@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Course Tracker</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body class="landing-body">
+    <main class="container py-4 py-lg-5">
+      <section class="landing-shell">
+        <header class="topbar">
+          <div class="brand-mark">
+            <span class="brand-seal">SC</span>
+            <div>
+              <p class="eyebrow mb-1">Academic Records Platform</p>
+              <h1 class="brand-title mb-0">Student Course Tracker</h1>
+            </div>
+          </div>
+          <div class="topbar-actions">
+            {% if authenticated %}
+            <a class="btn btn-outline-light" href="{{ url_for('main.index') }}">Open Dashboard</a>
+            {% endif %}
+            <a class="btn btn-accent" href="{{ url_for('main.login') }}">Login</a>
+          </div>
+        </header>
+
+        <section class="landing-hero">
+          <div class="hero-copy">
+            <p class="eyebrow mb-2">Student Information Management</p>
+            <h2 class="hero-title mb-3">A clearer way to manage students, courses, and enrollments.</h2>
+            <p class="hero-text mb-4">
+              Keep academic records organized through one streamlined workspace for student profiles,
+              course catalog updates, and semester enrollment tracking.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-accent btn-lg" href="{{ url_for('main.login') }}">Login to Continue</a>
+              {% if authenticated %}
+              <a class="btn btn-outline-light btn-lg" href="{{ url_for('main.index') }}">Go to Dashboard</a>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="hero-panels">
+            <article class="hero-panel">
+              <p class="panel-label">Students</p>
+              <h3>Profiles and programs</h3>
+              <p>Store student numbers, names, email addresses, and program information in one place.</p>
+            </article>
+            <article class="hero-panel">
+              <p class="panel-label">Courses</p>
+              <h3>Structured course records</h3>
+              <p>Capture course codes, titles, lecturers, and credit hours with a clean administrative flow.</p>
+            </article>
+            <article class="hero-panel">
+              <p class="panel-label">Enrollments</p>
+              <h3>Semester-based tracking</h3>
+              <p>Monitor which students are enrolled, completed, or dropped across each semester.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="landing-grid">
+          <article class="info-card">
+            <p class="panel-label">Organized</p>
+            <h3>Everything on dedicated pages</h3>
+            <p>The recording page is kept separate from the recorded-details page so each workflow stays focused.</p>
+          </article>
+          <article class="info-card">
+            <p class="panel-label">Secure</p>
+            <h3>Protected administrative access</h3>
+            <p>Only authenticated users can open the records dashboard and work with the data management tools.</p>
+          </article>
+          <article class="info-card">
+            <p class="panel-label">Practical</p>
+            <h3>Built for routine academic use</h3>
+            <p>The interface supports day-to-day record keeping without the clutter of deployment or demo messaging.</p>
+          </article>
+        </section>
+      </section>
+    </main>
+  </body>
+  </html>

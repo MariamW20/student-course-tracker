@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard | Student Course Tracker</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body class="dashboard-body">
+    <main class="container py-4">
+      <section class="hero mb-4 p-4 rounded-4">
+        <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 align-items-start">
+          <div>
+            <p class="eyebrow mb-2">Recording Dashboard</p>
+            <h1 class="display-6 mb-3">Student Course Tracker</h1>
+            <p class="lead mb-0">
+              Add and update student, course, and enrollment information from one focused recording workspace.
+            </p>
+          </div>
+          <div class="dashboard-stats">
+            <div class="stat-card">
+              <span>Students</span>
+              <strong id="studentCount">0</strong>
+            </div>
+            <div class="stat-card">
+              <span>Courses</span>
+              <strong id="courseCount">0</strong>
+            </div>
+            <div class="stat-card">
+              <span>Enrollments</span>
+              <strong id="enrollmentCount">0</strong>
+            </div>
+          </div>
+        </div>
+        <div class="toolbar mt-4">
+          <div class="user-pill">
+            Signed in as <strong id="sessionUser">admin</strong>
+          </div>
+          <div class="toolbar-actions">
+            <a class="btn btn-outline-light btn-sm" href="{{ url_for('main.records') }}">View Recorded Details</a>
+            <button id="logoutButton" class="btn btn-outline-light btn-sm">Logout</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-4">
+        <div id="alertHost"></div>
+      </section>
+
+      <section class="row g-4">
+        <div class="col-12 col-xl-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <h2 class="h4">Students</h2>
+              <form id="studentForm" class="row g-3 mb-4">
+                <input type="hidden" id="studentId">
+                <div class="col-12">
+                  <label class="form-label" for="studentNumber">Student number</label>
+                  <input class="form-control" id="studentNumber" required>
+                </div>
+                <div class="col-6">
+                  <label class="form-label" for="studentFirstName">First name</label>
+                  <input class="form-control" id="studentFirstName" required>
+                </div>
+                <div class="col-6">
+                  <label class="form-label" for="studentLastName">Last name</label>
+                  <input class="form-control" id="studentLastName" required>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="studentEmail">Email</label>
+                  <input class="form-control" id="studentEmail" type="email" required>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="studentProgram">Program</label>
+                  <input class="form-control" id="studentProgram" required>
+                </div>
+                <div class="col-12 d-flex gap-2">
+                  <button class="btn btn-dark" type="submit">Save student</button>
+                  <button class="btn btn-outline-secondary" type="button" data-reset-form="studentForm">Clear</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-xl-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <h2 class="h4">Courses</h2>
+              <form id="courseForm" class="row g-3 mb-4">
+                <input type="hidden" id="courseId">
+                <div class="col-12">
+                  <label class="form-label" for="courseCode">Course code</label>
+                  <input class="form-control" id="courseCode" required>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="courseTitle">Title</label>
+                  <input class="form-control" id="courseTitle" required>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="courseInstructor">Instructor</label>
+                  <input class="form-control" id="courseInstructor" required>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="courseCredits">Credit hours</label>
+                  <input class="form-control" id="courseCredits" type="number" min="1" required>
+                </div>
+                <div class="col-12 d-flex gap-2">
+                  <button class="btn btn-dark" type="submit">Save course</button>
+                  <button class="btn btn-outline-secondary" type="button" data-reset-form="courseForm">Clear</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-xl-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <h2 class="h4">Enrollments</h2>
+              <form id="enrollmentForm" class="row g-3 mb-4">
+                <input type="hidden" id="enrollmentId">
+                <div class="col-12">
+                  <label class="form-label" for="enrollmentStudent">Student</label>
+                  <select class="form-select" id="enrollmentStudent" required></select>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="enrollmentCourse">Course</label>
+                  <select class="form-select" id="enrollmentCourse" required></select>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="enrollmentSemester">Semester</label>
+                  <input class="form-control" id="enrollmentSemester" placeholder="2026 Semester 1" required>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="enrollmentStatus">Status</label>
+                  <select class="form-select" id="enrollmentStatus" required>
+                    <option value="active">Active</option>
+                    <option value="completed">Completed</option>
+                    <option value="dropped">Dropped</option>
+                  </select>
+                </div>
+                <div class="col-12 d-flex gap-2">
+                  <button class="btn btn-dark" type="submit">Save enrollment</button>
+                  <button class="btn btn-outline-secondary" type="button" data-reset-form="enrollmentForm">Clear</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+  </html>
