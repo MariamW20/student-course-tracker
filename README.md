@@ -35,7 +35,6 @@ Student Course Tracker is a Flask web application for managing students, courses
 |   |-- __init__.py
 |   |-- models.py
 |   `-- routes.py
-|-- docs/
 |-- sample_data/
 |   |-- schema.sql
 |   `-- sample_rows.sql
@@ -86,14 +85,14 @@ Student Course Tracker is a Flask web application for managing students, courses
    CREATE DATABASE student_course_tracker;
    ```
 
-6. Update `.env` with your local values:
+6. Update `.env` with your local values and choose your own admin credentials:
 
    ```env
    SECRET_KEY=dev-secret-key
    DATABASE_URL=mysql+pymysql://root:@localhost/student_course_tracker
    LOG_LEVEL=INFO
-   ADMIN_USERNAME=admin
-   ADMIN_PASSWORD=admin123
+   ADMIN_USERNAME=your_admin_username
+   ADMIN_PASSWORD=your_strong_password
    ```
 
 7. Run the app:
@@ -113,7 +112,7 @@ The app creates its tables automatically on startup.
 ## Default Local Behavior
 
 - If `DATABASE_URL` is not set, the app uses `mysql+pymysql://root:@localhost/student_course_tracker`.
-- If admin credentials are not set, the defaults are `admin` and `admin123`.
+- Set `ADMIN_USERNAME` and `ADMIN_PASSWORD` in `.env` or your deployment environment before sharing or deploying the app.
 - `/health` is public.
 - Dashboard and API routes require login.
 
@@ -162,13 +161,6 @@ You can also load demo records from the UI after logging in by using the sample 
 - Railway configuration is included in [railway.json](/C:/Users/Admin/Desktop/CloudApp/railway.json)
 - The Procfile is included in [Procfile](/C:/Users/Admin/Desktop/CloudApp/Procfile)
 - A GitHub Actions import check is included in [.github/workflows/ci.yml](/C:/Users/Admin/Desktop/CloudApp/.github/workflows/ci.yml)
-
-## Documentation
-
-- Submission checklist: [docs/deliverables.md](/C:/Users/Admin/Desktop/CloudApp/docs/deliverables.md)
-- Deployment guide: [docs/deployment-steps.md](/C:/Users/Admin/Desktop/CloudApp/docs/deployment-steps.md)
-- Report draft: [docs/report.md](/C:/Users/Admin/Desktop/CloudApp/docs/report.md)
-- Final report draft: [docs/final-report.md](/C:/Users/Admin/Desktop/CloudApp/docs/final-report.md)
 
 ## Troubleshooting
 
